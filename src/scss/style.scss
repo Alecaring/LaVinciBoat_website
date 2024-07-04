@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: black;
+}
+
+.navContainer {
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(0, 0, 0);
+    color: white;
+
+    nav {
+        height: 100%;
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        margin: 0 auto;
+        height: 100%;
+        list-style-type: none;
+
+        li {
+            i {
+                font-size: 1.6rem;
+            }
+
+            span {
+                font-weight: 600;
+                font-size: 1.4rem;
+                sup {
+                    font-weight: 100;
+                }
+            }
+        }
+    }
+}
+
+.hiddenLinkContainer {
+    width: 100%;
+    height: 90vh;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .hiddenLink {
+        width: 70%;
+        height: 50vh;
+        font-size: 3.5rem;
+        line-height: 3.2rem;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        ul {
+            list-style-type: none;
+
+            .li {
+                text-decoration: none;
+                color: inherit;
+                font-weight: 700;
+                background-color: transparent;
+
+            }
+            
+
+        }
+    }
+
+    .HiddenLinkSocial {
+        width: 80%;
+        height: 30vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            padding: 2rem;
+
+            i {
+                padding: 1rem 1.8rem;
+                font-size: 2rem;
+                color: white;
+            }
+
+        }
+
+    }
+}
+
+// navbar - navHidden
+// ------------------------------
+
+.containerBanner {
+    height: 40vh;
+    width: 100%;
+
+    h2 {
+        color: white;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0 1rem;
+        font-size: 3rem;
+        line-height: 3.2rem;
+
+        span {
+            background-color: transparent;
+            padding-bottom: 2rem;
+
+        }
+
+    }
+}
+
+.containerVideoBanner {
+    width: 100%;
+    height: 50vh;
+    background-color: #fff;
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+// ------------------------
+.containerFeaturedWork {
+    color: white;
+    width: 100%;
+    .containerTopFeatWork {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        padding: 5rem 0 3rem;
+        margin: 0 auto;
+
+        h2 {
+            font-size: 1.8rem;
+        }
+        
+        a {
+            border: .1px solid white;
+            border-radius: 2rem;
+            padding: 1rem 2rem;
+        }
+    }
+    // ------------------------
+    .containerFeaturedWorkSlider {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        overflow-x: scroll;
+        height: 65vh;
+        gap: 1rem;
+        padding: 0 1rem;
+        
+        
+        
+        
+        .FeatWorkCards {
+            min-width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 1rem;
+
+            }
+            h3 {
+                padding: 1rem .2rem .4rem;
+            }
+        }
+    }
+}
+// ------------------------
+.containerCollaboration {
+    color: white;
+    width: 90%;
+    padding: 5rem 0 0rem;
+    margin: 0 auto;
+
+    h2 {
+        font-size: 2.3rem;
+    }
+}
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+  }

@@ -1,0 +1,85 @@
+<script>
+export default {
+  data() {
+    return {
+      arr: [
+        { name: 'Home', source: 'Home' },
+        { name: 'Portfolio', source: 'Portfolio' },
+        { name: 'About', source: 'About' },
+        { name: 'Contact', source: 'Contact' },
+      ],
+      socialsNavArr: [
+        { icon: 'fa-brands fa-instagram', href: '#', name: 'Instagram' },
+        { icon: 'fa-brands fa-facebook-f', href: '#', name: 'Facebook' },
+        { icon: 'fa-brands fa-pinterest-p', href: '#', name: 'Pinterest' },
+        { icon: 'fa-brands fa-youtube', href: '#', name: 'Youtube' },
+        { icon: 'fa-brands fa-linkedin-in', href: '#', name: 'Linkedin' },
+      ],
+      isActive: false,
+    };
+  },
+  methods: {
+    openNavMenu() {
+      this.isActive = !this.isActive;
+    },
+  },
+};
+</script>
+
+
+
+<template>
+    <div class="navContainer">
+      <nav>
+        <ul>
+          <li>
+            <span>
+              La Vinci Yacht <sup>®</sup>
+            </span>
+          </li>
+          <li @click="openNavMenu"><i class="fa-solid fa-bars-staggered"></i></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- ------------------------- -->
+    <transition name="menu-transition">
+      <div class="hiddenLinkContainer" v-if="isActive">
+        <nav class="hiddenLink">
+          <ul>
+            <li v-for="(item, index) in arr" :key="index">
+              <router-link class="li" :to="{ name: item.source }">{{ item.name }}</router-link>
+            </li>
+          </ul>
+        </nav>
+        <div class="HiddenLinkSocial">
+          <nav>
+            <div class="innerContainerHiddenLinkSocial" v-for="(socialIcon, index) in socialsNavArr" :key="index">
+              <i :class="socialIcon.icon"></i>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </transition>
+  </template>
+  
+
+  
+  <style lang="scss" scoped>  
+  .hiddenLinkContainer {
+    overflow: hidden;
+  }
+  
+  .menu-transition-enter-active,
+  .menu-transition-leave-active {
+    transition: all .5s ease;
+  }
+  .menu-transition-enter,
+  .menu-transition-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  .menu-transition-leave-active {
+    transform: translateY(20px);
+  }
+  </style>
+  
