@@ -1,11 +1,17 @@
 <script>
+import { storeData } from '../../store.js';
+
 export default {
-  
+  data() {
+    return {
+      storeData,
+    }
+  },
 }
 </script>
 
 <template>
-  <div>
+  <div :class="storeData.isActive === true ? 'none' : ''">
     about
   </div>
 </template>

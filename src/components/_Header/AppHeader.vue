@@ -1,7 +1,9 @@
 <script>
+import { storeData } from '../../store.js';
 export default {
   data() {
     return {
+      storeData,
       arr: [
         { name: 'Home', source: 'Home' },
         { name: 'Portfolio', source: 'Portfolio' },
@@ -15,12 +17,11 @@ export default {
         { icon: 'fa-brands fa-youtube', href: '#', name: 'Youtube' },
         { icon: 'fa-brands fa-linkedin-in', href: '#', name: 'Linkedin' },
       ],
-      isActive: false,
     };
   },
   methods: {
     openNavMenu() {
-      this.isActive = !this.isActive;
+      this.storeData.isActive = !this.storeData.isActive;
     },
   },
 };
@@ -29,57 +30,61 @@ export default {
 
 
 <template>
-    <div class="navContainer">
-      <nav>
-        <ul>
-          <li>
+  <div class="navContainer">
+    <nav>
+      <ul>
+        <li>
+          <router-link class="titleLink" to="/">
             <span>
-              La Vinci Yacht <sup>®</sup>
+              La Vinci <span>Yatch</span><sup>®</sup>
             </span>
+          </router-link>
+
+        </li>
+        <li @click="openNavMenu"><i class="fa-solid fa-bars-staggered"></i></li>
+      </ul>
+    </nav>
+  </div>
+  <!-- ------------------------- -->
+  <transition name="menu-transition">
+    <div class="hiddenLinkContainer" v-if="storeData.isActive">
+      <nav class="hiddenLink">
+        <ul>
+          <li v-for="(item, index) in arr" :key="index">
+            <router-link @click="openNavMenu" class="li" :to="{ name: item.source }">{{ item.name }}</router-link>
           </li>
-          <li @click="openNavMenu"><i class="fa-solid fa-bars-staggered"></i></li>
         </ul>
       </nav>
-    </div>
-    <!-- ------------------------- -->
-    <transition name="menu-transition">
-      <div class="hiddenLinkContainer" v-if="isActive">
-        <nav class="hiddenLink">
-          <ul>
-            <li v-for="(item, index) in arr" :key="index">
-              <router-link class="li" :to="{ name: item.source }">{{ item.name }}</router-link>
-            </li>
-          </ul>
+      <div class="HiddenLinkSocial">
+        <nav>
+          <div class="innerContainerHiddenLinkSocial" v-for="(socialIcon, index) in socialsNavArr" :key="index">
+            <i :class="socialIcon.icon"></i>
+          </div>
         </nav>
-        <div class="HiddenLinkSocial">
-          <nav>
-            <div class="innerContainerHiddenLinkSocial" v-for="(socialIcon, index) in socialsNavArr" :key="index">
-              <i :class="socialIcon.icon"></i>
-            </div>
-          </nav>
-        </div>
       </div>
-    </transition>
-  </template>
+    </div>
+  </transition>
+</template>
   
 
   
-  <style lang="scss" scoped>  
-  .hiddenLinkContainer {
+<style lang="scss" scoped>  .hiddenLinkContainer {
     overflow: hidden;
   }
-  
+
   .menu-transition-enter-active,
   .menu-transition-leave-active {
     transition: all .5s ease;
   }
+
   .menu-transition-enter,
   .menu-transition-leave-to {
     transform: translateY(-20px);
     opacity: 0;
   }
+
   .menu-transition-leave-active {
     transform: translateY(20px);
   }
-  </style>
+</style>
   
