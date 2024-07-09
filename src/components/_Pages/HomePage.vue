@@ -1,171 +1,133 @@
 <script>
 import { storeData } from '../../store.js';
+import AppBanner from './_ComponentHome/AppBanner.vue';
+
 
 export default {
-  data() {
-    return {
-      expandedCardFree: false,
-      freeItems: [
-        { name: "Equipaggio Professionale (Capitano, Equipaggio di coperta, Cuoco/chef)", short: "Equipaggio", icon: "fas fa-user-check", included: true },
-        { name: "Pulizia giornaliera", short: "Pulizia", icon: "fas fa-broom", included: true },
-        { name: "Biancheria da letto e da bagno", short: "Biancheria", icon: "fas fa-bed", included: true },
-        { name: "Articoli da toeletta di alta qualità", short: "Toeletta", icon: "fas fa-soap", included: true },
-        { name: "Colazione, pranzo e cena", short: "Pasti", icon: "fas fa-utensils", included: true },
-        { name: "Snack e bevande analcoliche", short: "Snack", icon: "fas fa-coffee", included: true },
-        { name: "Acqua potabile", short: "Acqua", icon: "fas fa-water", included: true },
-        { name: "Attrezzatura per snorkeling", short: "Snorkeling", icon: "fas fa-mask", included: true },
-        { name: "Kayak e paddleboard", short: "Kayak", icon: "fas fa-kayak", included: true },
-        { name: "Giochi da tavolo e libri", short: "Giochi", icon: "fas fa-chess", included: true },
-        { name: "TV satellitare e sistema di intrattenimento", short: "Intrattenimento", icon: "fas fa-tv", included: true },
-        { name: "Trasferimenti da e per l'aeroporto", short: "Trasferimenti", icon: "fas fa-shuttle-van", included: true },
-        { name: "Wi-Fi a bordo", short: "Wi-Fi", icon: "fas fa-wifi", included: true },
-        { name: "Sistema di navigazione avanzato", short: "Navigazione", icon: "fas fa-compass", included: true },
-        { name: "Equipaggiamento di sicurezza completo", short: "Sicurezza", icon: "fas fa-life-ring", included: true }
-      ],
-      premiumItems: [
-        { name: "Pianificazione di itinerari personalizzati", short: "Itinerari", icon: "fas fa-map-marked-alt", included: false },
-        { name: "Prenotazione di ristoranti e eventi", short: "Prenotazioni", icon: "fas fa-calendar-alt", included: false },
-        { name: "Escursioni a terra organizzate", short: "Escursioni", icon: "fas fa-hiking", included: false },
-        { name: "Menu gourmet personalizzati", short: "Gourmet", icon: "fas fa-utensils", included: false },
-        { name: "Bevande alcoliche di alta qualità", short: "Bevande", icon: "fas fa-glass-martini-alt", included: false },
-        { name: "Champagne e vini pregiati", short: "Champagne", icon: "fas fa-wine-bottle", included: false },
-        { name: "Jetski e motoscafi", short: "Jetski", icon: "fas fa-water", included: false },
-        { name: "Immersioni subacquee con istruttore", short: "Immersioni", icon: "fas fa-swimmer", included: false },
-        { name: "Parasailing", short: "Parasailing", icon: "fas fa-parachute-box", included: false },
-        { name: "Attrezzatura per pesca sportiva", short: "Pesca", icon: "fas fa-fish", included: false },
-        { name: "Massaggi e trattamenti spa", short: "Spa", icon: "fas fa-spa", included: false },
-        { name: "Personal trainer e yoga", short: "Trainer", icon: "fas fa-dumbbell", included: false },
-        { name: "Sauna e jacuzzi", short: "Sauna", icon: "fas fa-hot-tub", included: false },
-        { name: "Organizzazione di feste e eventi a tema", short: "Eventi", icon: "fas fa-music", included: false },
-        { name: "Musica dal vivo e DJ", short: "Musica", icon: "fas fa-headphones", included: false },
-        { name: "Fotografo e videomaker a bordo", short: "Fotografo", icon: "fas fa-camera", included: false },
-        { name: "Traduttore personale", short: "Traduttore", icon: "fas fa-language", included: false },
-        { name: "Assistenza medica privata", short: "Medica", icon: "fas fa-user-md", included: false }
-      ],
-      storeData,
-      currentIndex: 0,
-      changeWordsArray: [
-        { name: 'Exclusivity', super: '®' },
-        { name: 'Elegance', super: '®' },
-        { name: 'Prestige', super: '®' },
-        { name: 'Sophistication', super: '®' },
-        { name: 'Comfort', super: '®' },
-        { name: 'Luxury', super: '®' },
-        { name: 'Adventure', super: '®' },
-        { name: 'Unforgettable', super: '®' },
-        { name: 'Customized', super: '®' },
-        { name: 'Excellence', super: '®' }
-      ],
-      FeaturedWorkArray: [
-        {
-          img: '1.png',
-          title: 'Hot Type',
-          description: 'Red hot type animations'
-        },
-        {
-          img: '2.png',
-          title: 'Alterscopo',
-          description: 'Web3 risks in real time'
-        },
-        {
-          img: '3.png',
-          title: 'Hot Type',
-          description: 'Red hot type animations'
-        },
-        {
-          img: '4.png',
-          title: 'Alterscopo',
-          description: 'Web3 risks in real time'
-        },
-        {
-          img: '5.png',
-          title: 'Hot Type',
-          description: 'Red hot type animations'
-        },
-        {
-          img: '6.png',
-          title: 'Alterscopo',
-          description: 'Web3 risks in real time'
-        },
-
-      ],
-      cards: [
-        { img: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.1413502914.1719792000&semt=ais_user' },
-        { img: 'https://st2.depositphotos.com/1810600/5838/v/450/depositphotos_58387439-stock-illustration-abstract-vector-logo.jpg' },
-        { img: 'https://media.istockphoto.com/id/1331491686/it/vettoriale/progettazione-degli-elementi.jpg?s=612x612&w=0&k=20&c=cyIAEi8Lre1uFRUcMyWJP-GgbfRCA-dKlwpbQ0ZrFeE=' },
-        { img: 'https://marketplace.canva.com/EAFauoQSZtY/1/0/1600w/canva-brown-mascot-lion-free-logo-qJptouniZ0A.jpg' },
-        { img: 'https://media.istockphoto.com/id/1313644269/it/vettoriale/modello-di-logo-stella-cerchio-oro-e-argento.jpg?s=612x612&w=0&k=20&c=ghO_oBuygdYu7OZP-ik4rz3khCaDSXTRRxJP5-Cgtac=' },
-        { img: 'https://img.freepik.com/free-vector/gradient-quill-pen-logo-with-tagline-template_23-2149813051.jpg' },
-      ],
-      activeIndex: 0,
-      whatsOnBoardArray: [
-        { component: "Wather", pro: false },
-        { component: "champain", pro: true },
-        { component: "glasses", pro: false },
-        { component: "apetizer", pro: true },
-        { component: "telos", pro: true },
-        { component: "capitan", pro: false },
-        { component: "assistents", pro: false },
-
-      ],
-    };
-  },
-  computed: {
-    currentWord() {
-      return this.changeWordsArray[this.currentIndex];
+  components: { AppBanner, },
+    data() {
+        return {
+            expandedCardFree: false,
+            freeItems: [
+                { name: "Equipaggio Professionale (Capitano, Equipaggio di coperta, Cuoco/chef)", short: "Equipaggio", icon: "fas fa-user-check", included: true },
+                { name: "Pulizia giornaliera", short: "Pulizia", icon: "fas fa-broom", included: true },
+                { name: "Biancheria da letto e da bagno", short: "Biancheria", icon: "fas fa-bed", included: true },
+                { name: "Articoli da toeletta di alta qualità", short: "Toeletta", icon: "fas fa-soap", included: true },
+                { name: "Colazione, pranzo e cena", short: "Pasti", icon: "fas fa-utensils", included: true },
+                { name: "Snack e bevande analcoliche", short: "Snack", icon: "fas fa-coffee", included: true },
+                { name: "Acqua potabile", short: "Acqua", icon: "fas fa-water", included: true },
+                { name: "Attrezzatura per snorkeling", short: "Snorkeling", icon: "fas fa-mask", included: true },
+                { name: "Kayak e paddleboard", short: "Kayak", icon: "fas fa-kayak", included: true },
+                { name: "Giochi da tavolo e libri", short: "Giochi", icon: "fas fa-chess", included: true },
+                { name: "TV satellitare e sistema di intrattenimento", short: "Intrattenimento", icon: "fas fa-tv", included: true },
+                { name: "Trasferimenti da e per l'aeroporto", short: "Trasferimenti", icon: "fas fa-shuttle-van", included: true },
+                { name: "Wi-Fi a bordo", short: "Wi-Fi", icon: "fas fa-wifi", included: true },
+                { name: "Sistema di navigazione avanzato", short: "Navigazione", icon: "fas fa-compass", included: true },
+                { name: "Equipaggiamento di sicurezza completo", short: "Sicurezza", icon: "fas fa-life-ring", included: true }
+            ],
+            premiumItems: [
+                { name: "Pianificazione di itinerari personalizzati", short: "Itinerari", icon: "fas fa-map-marked-alt", included: false },
+                { name: "Prenotazione di ristoranti e eventi", short: "Prenotazioni", icon: "fas fa-calendar-alt", included: false },
+                { name: "Escursioni a terra organizzate", short: "Escursioni", icon: "fas fa-hiking", included: false },
+                { name: "Menu gourmet personalizzati", short: "Gourmet", icon: "fas fa-utensils", included: false },
+                { name: "Bevande alcoliche di alta qualità", short: "Bevande", icon: "fas fa-glass-martini-alt", included: false },
+                { name: "Champagne e vini pregiati", short: "Champagne", icon: "fas fa-wine-bottle", included: false },
+                { name: "Jetski e motoscafi", short: "Jetski", icon: "fas fa-water", included: false },
+                { name: "Immersioni subacquee con istruttore", short: "Immersioni", icon: "fas fa-swimmer", included: false },
+                { name: "Parasailing", short: "Parasailing", icon: "fas fa-parachute-box", included: false },
+                { name: "Attrezzatura per pesca sportiva", short: "Pesca", icon: "fas fa-fish", included: false },
+                { name: "Massaggi e trattamenti spa", short: "Spa", icon: "fas fa-spa", included: false },
+                { name: "Personal trainer e yoga", short: "Trainer", icon: "fas fa-dumbbell", included: false },
+                { name: "Sauna e jacuzzi", short: "Sauna", icon: "fas fa-hot-tub", included: false },
+                { name: "Organizzazione di feste e eventi a tema", short: "Eventi", icon: "fas fa-music", included: false },
+                { name: "Musica dal vivo e DJ", short: "Musica", icon: "fas fa-headphones", included: false },
+                { name: "Fotografo e videomaker a bordo", short: "Fotografo", icon: "fas fa-camera", included: false },
+                { name: "Traduttore personale", short: "Traduttore", icon: "fas fa-language", included: false },
+                { name: "Assistenza medica privata", short: "Medica", icon: "fas fa-user-md", included: false }
+            ],
+            storeData,
+            activeIndex: 0,
+            
+            FeaturedWorkArray: [
+                {
+                    img: '1.png',
+                    title: 'Hot Type',
+                    description: 'Red hot type animations'
+                },
+                {
+                    img: '2.png',
+                    title: 'Alterscopo',
+                    description: 'Web3 risks in real time'
+                },
+                {
+                    img: '3.png',
+                    title: 'Hot Type',
+                    description: 'Red hot type animations'
+                },
+                {
+                    img: '4.png',
+                    title: 'Alterscopo',
+                    description: 'Web3 risks in real time'
+                },
+                {
+                    img: '5.png',
+                    title: 'Hot Type',
+                    description: 'Red hot type animations'
+                },
+                {
+                    img: '6.png',
+                    title: 'Alterscopo',
+                    description: 'Web3 risks in real time'
+                },
+            ],
+            cards: [
+                { img: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.1413502914.1719792000&semt=ais_user' },
+                { img: 'https://st2.depositphotos.com/1810600/5838/v/450/depositphotos_58387439-stock-illustration-abstract-vector-logo.jpg' },
+                { img: 'https://media.istockphoto.com/id/1331491686/it/vettoriale/progettazione-degli-elementi.jpg?s=612x612&w=0&k=20&c=cyIAEi8Lre1uFRUcMyWJP-GgbfRCA-dKlwpbQ0ZrFeE=' },
+                { img: 'https://marketplace.canva.com/EAFauoQSZtY/1/0/1600w/canva-brown-mascot-lion-free-logo-qJptouniZ0A.jpg' },
+                { img: 'https://media.istockphoto.com/id/1313644269/it/vettoriale/modello-di-logo-stella-cerchio-oro-e-argento.jpg?s=612x612&w=0&k=20&c=ghO_oBuygdYu7OZP-ik4rz3khCaDSXTRRxJP5-Cgtac=' },
+                { img: 'https://img.freepik.com/free-vector/gradient-quill-pen-logo-with-tagline-template_23-2149813051.jpg' },
+            ],
+            
+        };
     },
-    limitedFreeItems() {
-      return this.freeItems.slice(0, 5);
+    computed: {
+        limitedFreeItems() {
+            return this.freeItems.slice(0, 5);
+        },
+        limitedpremiumItems() {
+            return this.premiumItems.slice(0, 5);
+        }
     },
-    limitedpremiumItems() {
-      return this.premiumItems.slice(0, 5);
-    }
-  },
-  methods: {
-    nextWord() {
-      this.currentIndex = (this.currentIndex + 1) % this.changeWordsArray.length;
+    methods: {
+        getCardStyle(index) {
+            const angle = (index - this.activeIndex) * 40; // Puoi regolare questo valore per cambiare l'angolo
+            const isMiddle = index === this.activeIndex;
+            return {
+                transform: `rotateY(${angle}deg) translateZ(220px)`,
+                opacity: isMiddle ? 1 : 0.5, // Regola l'opacità per migliorare l'effetto visivo
+                transition: 'transform 1s, opacity 1s',
+                zIndex: isMiddle ? 1 : 0,
+            };
+        },
+        rotateCards() {
+            this.activeIndex = (this.activeIndex + 1) % this.cards.length;
+        },
+        changeWhatsOnBoars() {
+            this.expandedCardFree = !this.expandedCardFree;
+        }
     },
-    getCardStyle(index) {
-      const angle = (index - this.activeIndex) * 40; // Puoi regolare questo valore per cambiare l'angolo
-      const isMiddle = index === this.activeIndex;
-      return {
-        transform: `rotateY(${angle}deg) translateZ(220px)`,
-        opacity: isMiddle ? 1 : 0.5, // Regola l'opacità per migliorare l'effetto visivo
-        transition: 'transform 1s, opacity 1s',
-        zIndex: isMiddle ? 1 : 0,
-      };
+    mounted() {
+        setInterval(this.rotateCards, 3000);
     },
-    rotateCards() {
-      this.activeIndex = (this.activeIndex + 1) % this.cards.length;
-    },
-    changeWhatsOnBoars() {
-      this.expandedCardFree = !this.expandedCardFree;
-    }
-  },
-  mounted() {
-    this.wordInterval = setInterval(this.nextWord, 1500);
-    setInterval(this.rotateCards, 3000);
-
-  },
-  beforeDestroy() {
-    clearInterval(this.wordInterval);
-  }
+    
 };
 </script>
 
 <template>
   <div :class="storeData.isActive === true ? 'none' : ''">
-    <div class="containerBanner">
-      <h2>
-        Design Trip <br>
-        for Timeless <br>
-        <transition name="fade" mode="out-in">
-          <span class="word-slider" :key="currentWord.name">
-            {{ currentWord.name }}
-          </span>
-        </transition>
-      </h2>
-    </div>
+    
+    <AppBanner/>
     <!-- ---------------------- -->
     <div class="containerVideoBanner">
       <video autoplay loop muted>
