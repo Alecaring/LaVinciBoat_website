@@ -1,3 +1,44 @@
+<template>
+  <div :class="storeData.isActive === true ? 'none' : ''">
+    <div>
+      <div class="containerPortfolioBannerTitle">
+        <h1>Portfolio<sub>®</sub></h1>
+      </div>
+      <div class="PortfolioBannerPills">
+        <div v-for="item in navLinks" :key="item.adv" @click="clickChangeLink(item.adv)">
+          <h5 :class="{ active: item.adv === activeLink }">{{ item.adv }}</h5>
+        </div>
+      </div>
+      <!-- ---------------------------------- -->
+      <div class="containerCardPortfolio">
+        <div class="cardsPortflolio" v-for="item in filteredPortfolioCards" :key="item.title">
+          <div class="card">
+            <div class="cardHead">
+              <img :src="item.img" alt="">
+            </div>
+            <div class="cardFooter">
+              <span>{{ item.title }}</span>
+              <p>{{ item.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ---------------------------------- -->
+    </div>
+    <!-- ------------------ -->
+    <div>
+      <div class="footerContainerHomePage">
+        <h4>Footer<sub>®</sub></h4>
+      </div>
+    
+      <div class="containerBottomFooterHomePge">
+        <p>Small is Beautiful</p>
+        <p>La Vinci Yatch® - All Right Reserved - Privacy Policy</p>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 import { storeData } from '../../store.js';
 
@@ -48,6 +89,15 @@ export default {
       ],
     }
   },
+  computed: {
+    filteredPortfolioCards() {
+      if (this.activeLink === 'Discover All') {
+        return this.datasPortfolioCards;
+      } else {
+        return this.datasPortfolioCards.filter(card => card.where === this.activeLink);
+      }
+    }
+  },
   methods: {
     clickChangeLink(link) {
       this.activeLink = link;
@@ -55,48 +105,6 @@ export default {
   },
 }
 </script>
-
-<template>
-  <div :class="storeData.isActive === true ? 'none' : ''">
-    <div>
-      <div class="containerPortfolioBannerTitle">
-        <h1>Portfolio<sub>®</sub></h1>
-      </div>
-      <div class="PortfolioBannerPills">
-        <div v-for="item in navLinks" @click="clickChangeLink(item.adv)">
-          <h5 :class="{ active: item.adv === activeLink }">{{ item.adv }}</h5>
-        </div>
-      </div>
-      <!-- ---------------------------------- -->
-      <div class="containerCardPortfolio">
-        <div class="cardsPortflolio" v-for="item in datasPortfolioCards">
-          <div v-if="item.where === activeLink || activeLink === 'Discover All'" class="card">
-  
-            <div class="cardHead">
-              <img :src="item.img" alt="">
-            </div>
-            <div class="cardFooter">
-              <span>{{ item.title }}</span>
-              <p>{{ item.description }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ---------------------------------- -->
-    </div>
-    <!-- ------------------ -->
-    <div>
-      <div class="footerContainerHomePage">
-        <h4>Footer<sub>®</sub></h4>
-      </div>
-    
-      <div class="containerBottomFooterHomePge">
-        <p>Small is Beautiful</p>
-        <p>La Vinci Yatch® - All Right Reserved - Privacy Policy</p>
-      </div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .active {
@@ -109,15 +117,21 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   width: 100%;
   padding: 4rem 0;
-
+  gap: 2rem;
 }
+
 .cardsPortflolio {
   color: white;
   position: relative;
 
+  .cardHead {
+    img {
+      border-radius: 1rem;
+    }
+  }
+  
   .cardFooter {
     position: absolute;
     top: 0;
@@ -129,6 +143,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-radius: 1rem;
 
     span {
       background-color: transparent;

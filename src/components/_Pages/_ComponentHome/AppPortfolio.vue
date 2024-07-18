@@ -43,7 +43,7 @@ export default {
     <div class="containerFeaturedWork">
         <div class="containerTopFeatWork">
             <h2>Portfolio</h2>
-            <a href="/Portfolio">View All</a>
+            <router-link to="/portfolio"><span href="">View All</span></router-link>
         </div>
         <div class="containerFeaturedWorkSlider">
             <div v-for="item in FeaturedWorkArray" class="FeatWorkCards">

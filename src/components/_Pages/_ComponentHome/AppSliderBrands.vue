@@ -40,8 +40,8 @@ export default {
 <template>
     <div>
         <div class="containerCollaboration">
-            <h2>Experience Pure Elegance, <br>
-                Prestige, and Comfort.</h2>
+            <h2>{{ $t('sliderBrandsTitle1') }} <br>
+                {{ $t('sliderBrandsTitle2') }}</h2>
         </div>
         <div class="slider">
             <div class="slider__container">
@@ -52,16 +52,11 @@ export default {
         </div>
         <div class="contenitorCollabBottomDescription">
             <p>
-                Discover the excellence of our luxury fleet. Every journey is a symphony of elegance, comfort, and
-                adventure.
-                From crystal-clear waters to breathtaking views, we offer you an unforgettable experience.
-                Let our professional crew take care of every detail, allowing you to relax and enjoy the trip of a lifetime.
-                Customize every moment with our exclusive and premium services.
-                With us, every desire becomes a reality.
+                {{ $t('sliderBrandsPara') }}
             </p>
             <a href="/About">
                 <div class="contenitorUnderCollabBottomDescription">
-                    <span>Let's Talk</span>
+                    <span>{{ $t('sliderBrandsDiscass') }}</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>
             </a>
@@ -72,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 .slider {
   perspective: 1000px;
-  width: 300px;
+  width: 100vw;
   /* Regola la larghezza in base alle tue necessità */
   height: 200px;
   /* Regola l'altezza in base alle tue necessità */

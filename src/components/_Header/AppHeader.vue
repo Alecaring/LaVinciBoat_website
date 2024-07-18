@@ -1,8 +1,10 @@
 <script>
 import { storeData } from '../../store.js';
+
 export default {
   data() {
     return {
+      componentKey: 0,
       storeData,
       arr: [
         { name: 'Home', source: 'Home' },
@@ -23,23 +25,37 @@ export default {
     openNavMenu() {
       this.storeData.isActive = !this.storeData.isActive;
     },
+    changeLanguage(lang) {
+      // Salvare la lingua nel localStorage
+      localStorage.setItem('language', lang);
+
+      // Cambiare la lingua
+      this.$i18n.locale = lang;
+
+      // Ricaricare la pagina per applicare le modifiche
+      window.location.reload();
+    }
   },
+  created() {
+    // Recuperare la lingua dal localStorage
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+      this.$i18n.locale = savedLanguage;
+    }
+  }
 };
 </script>
 
-
-
 <template>
-  <div class="navContainer">
+  <div class="navContainer" :key="componentKey">
     <nav>
       <ul>
         <li>
           <router-link class="titleLink" to="/">
             <span>
-              La Vinci <span>Yatch</span><sup>®</sup>
+              La Vinci <span>Yacht</span><sup>®</sup>
             </span>
           </router-link>
-
         </li>
         <li @click="openNavMenu"><i class="fa-solid fa-bars-staggered"></i></li>
       </ul>
@@ -55,6 +71,19 @@ export default {
           </li>
         </ul>
       </nav>
+      <div class="LangContainer">
+        <div>
+          <span class="rounded" @click="changeLanguage('en')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_the_United_Kingdom_Square.svg" alt="">
+          </span>
+        </div>
+        <div>
+          <span class="rounded" @click="changeLanguage('it')">
+            <img src="https://vectorflags.s3.amazonaws.com/flags/it-square-01.png" alt="">
+          </span>
+        </div>
+      </div>
+
       <div class="HiddenLinkSocial">
         <nav>
           <div class="innerContainerHiddenLinkSocial" v-for="(socialIcon, index) in socialsNavArr" :key="index">
@@ -65,26 +94,46 @@ export default {
     </div>
   </transition>
 </template>
-  
 
-  
-<style lang="scss" scoped>  .hiddenLinkContainer {
+<style lang="scss" scoped>
+.hiddenLinkContainer {
+  overflow: hidden;
+}
+
+.menu-transition-enter-active,
+.menu-transition-leave-active {
+  transition: all .5s ease;
+}
+
+.menu-transition-enter,
+.menu-transition-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.menu-transition-leave-active {
+  transform: translateY(20px);
+}
+
+.LangContainer {
+  color: white;
+  display: flex;
+  gap: 1.5rem;
+  .rounded {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+    border-radius: 50%;
     overflow: hidden;
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+    }
   }
-
-  .menu-transition-enter-active,
-  .menu-transition-leave-active {
-    transition: all .5s ease;
-  }
-
-  .menu-transition-enter,
-  .menu-transition-leave-to {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-
-  .menu-transition-leave-active {
-    transform: translateY(20px);
-  }
+}
 </style>
-  

@@ -88,7 +88,7 @@ export default {
     <div>
       <div class="containerBannerContacts">
         <h2>
-          Say
+          {{ $t('contactSay') }}
           <transition name="fade" mode="out-in">
             <span class="word-sliderContact" :key="currentWord.name">
               {{ currentWord.name }}
@@ -99,12 +99,12 @@ export default {
     </div>
 
     <div class="containerMailBooking">
-      <h4>Booking</h4>
+      <h4>{{ $t('contactBooking') }}</h4>
       <a href="mailto:mail@gmail.com">LaVinciYatch@Booking.com</a>
     </div>
 
     <div class="containerMailCareers">
-      <h4>Careers</h4>
+      <h4>{{ $t('contactCarriers') }}</h4>
       <a href="mailto:mail@gmail.com">LaVinciYatch@Careers.com</a>
     </div>
   </div>

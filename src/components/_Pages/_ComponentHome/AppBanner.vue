@@ -3,33 +3,39 @@ export default {
     data() {
         return {
             currentIndex: 0,
-
-            changeWordsArray:
-                [
-                    { name: 'Exclusivity', super: '®' },
-                    { name: 'Elegance', super: '®' },
-                    { name: 'Prestige', super: '®' },
-                    { name: 'Sophistication', super: '®' },
-                    { name: 'Comfort', super: '®' },
-                    { name: 'Luxury', super: '®' },
-                    { name: 'Adventure', super: '®' },
-                    { name: 'Unforgettable', super: '®' },
-                    { name: 'Customized', super: '®' },
-                    { name: 'Excellence', super: '®' }
-                ],
-        }
+            changeWordsArray: [],
+        };
     },
     computed: {
         currentWord() {
-            return this.changeWordsArray[this.currentIndex];
+            return this.changeWordsArray[this.currentIndex] || { name: '' };
         },
     },
     methods: {
+        updateWordsArray() {
+            this.changeWordsArray = [
+                { name: this.$t('words.exclusivity'), super: '®' },
+                { name: this.$t('words.elegance'), super: '®' },
+                { name: this.$t('words.prestige'), super: '®' },
+                { name: this.$t('words.sophistication'), super: '®' },
+                { name: this.$t('words.comfort'), super: '®' },
+                { name: this.$t('words.luxury'), super: '®' },
+                { name: this.$t('words.adventure'), super: '®' },
+                { name: this.$t('words.unforgettable'), super: '®' },
+                { name: this.$t('words.customized'), super: '®' },
+                { name: this.$t('words.excellence'), super: '®' }
+            ];
+        },
         nextWord() {
             this.currentIndex = (this.currentIndex + 1) % this.changeWordsArray.length;
         },
+        changeLanguage(lang) {
+            this.$i18n.locale = lang;  // Cambia la lingua
+            this.updateWordsArray();   // Aggiorna l'array delle parole
+        },
     },
     mounted() {
+        this.updateWordsArray(); // Inizializza l'array alla prima monta
         this.wordInterval = setInterval(this.nextWord, 1500);
     },
     beforeDestroy() {
@@ -41,8 +47,8 @@ export default {
 <template>
     <div class="containerBanner">
         <h2>
-            Design Trip <br>
-            for Timeless <br>
+            {{ $t('messaggioBannerHome1') }} <br>
+            {{ $t('messaggioBannerHome2') }} <br>
             <transition name="fade" mode="out-in">
                 <span class="word-slider" :key="currentWord.name">
                     {{ currentWord.name }}
@@ -50,7 +56,20 @@ export default {
             </transition>
         </h2>
     </div>
-    
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.word-slider {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>
