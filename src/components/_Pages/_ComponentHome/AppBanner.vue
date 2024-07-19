@@ -36,7 +36,7 @@ export default {
     },
     mounted() {
         this.updateWordsArray(); // Inizializza l'array alla prima monta
-        this.wordInterval = setInterval(this.nextWord, 1500);
+        this.wordInterval = setInterval(this.nextWord, 2000);
     },
     beforeDestroy() {
         clearInterval(this.wordInterval);
@@ -60,12 +60,15 @@ export default {
 
 <style lang="scss" scoped>
 .word-slider {
-    transition: opacity 0.5s ease-in-out;
+    display: inline-block;
+  min-width: 100%; /* Imposta una larghezza minima per evitare cambiamenti di layout */
+  white-space: nowrap; /* Impedisce che il testo vada a capo */
+  transition: opacity 1s ease-in-out;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .fade-enter,

@@ -3,6 +3,7 @@ import { createI18n } from 'vue-i18n';
 // .................................
 const messages = {
   en: {
+    helloInitial: 'Hello',
     messaggioBannerHome1: 'Elegance and ',
     messaggioBannerHome2: 'adventure ',
     messaggioBannerHome3: 'on board.',  
@@ -30,6 +31,7 @@ const messages = {
   }
   },
   it: {
+    helloInitial: 'Ciao',
     messaggioBannerHome1: 'Eleganza e ',
     messaggioBannerHome2: 'avventura ',
     messaggioBannerHome3: 'a bordo.',

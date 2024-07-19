@@ -1,5 +1,5 @@
 <template>
-  <div :class="storeData.isActive === true ? 'none' : ''">
+  <div v-if="storeData.flag === false" :class="storeData.isActive === true ? 'none' : ''">
     <div>
       <div class="containerPortfolioBannerTitle">
         <h1>Portfolio<sub>®</sub></h1>
@@ -12,15 +12,9 @@
       <!-- ---------------------------------- -->
       <div class="containerCardPortfolio">
         <div class="cardsPortflolio" v-for="item in filteredPortfolioCards" :key="item.title">
-          <div class="card">
-            <div class="cardHead">
-              <img :src="item.img" alt="">
-            </div>
-            <div class="cardFooter">
-              <span>{{ item.title }}</span>
-              <p>{{ item.description }}</p>
-            </div>
-          </div>
+          
+          <AppCardPort :img="item.img" :brand="item.brand" :price4h="item.price4h" :title="item.title"/>
+
         </div>
       </div>
       <!-- ---------------------------------- -->
@@ -30,7 +24,7 @@
       <div class="footerContainerHomePage">
         <h4>Footer<sub>®</sub></h4>
       </div>
-    
+
       <div class="containerBottomFooterHomePge">
         <p>Small is Beautiful</p>
         <p>La Vinci Yatch® - All Right Reserved - Privacy Policy</p>
@@ -41,68 +35,91 @@
 
 <script>
 import { storeData } from '../../store.js';
+import AppCardPort from './_Common/AppCardPort.vue';
 
 export default {
-  data() {
-    return {
-      storeData,
-      navLinks: [
-        { adv: 'Discover All' },
-        { adv: 'Polignano' },
-        { adv: 'Myconos' },
-        { adv: 'Zante' },
-        { adv: 'Isole Tremiti' },
-        { adv: 'Gallipoli' },
-      ],
-      activeLink: 'Discover All',
-      datasPortfolioCards: [
-        {
-          where: 'Polignano',
-          img: '1.png',
-          title: 'Polignano a Mare',
-          description: 'Polignano Description'
-        },
-        {
-          where: 'Myconos',
-          img: '2.png',
-          title: 'Myconos',
-          description: 'Myconos Description'
-        },
-        {
-          where: 'Zante',
-          img: '3.png',
-          title: 'Zante',
-          description: 'Zante Description'
-        },
-        {
-          where: 'Isole Tremiti',
-          img: '4.png',
-          title: 'Isole Tremiti',
-          description: 'Isole Tremiti Description'
-        },
-        {
-          where: 'Gallipoli',
-          img: '6.png',
-          title: 'Gallipoli',
-          description: 'Gallipoli Description'
+    data() {
+        return {
+            storeData,
+            navLinks: [
+                { adv: 'Discover All' },
+                { adv: 'Polignano' },
+                { adv: 'Leuca' },
+                { adv: 'Otranto' },
+                { adv: 'Isole Tremiti' },
+                { adv: 'Gallipoli' },
+            ],
+            activeLink: 'Discover All',
+            datasPortfolioCards: [
+                {
+                    where: 'Polignano',
+                    img: 'https://www.grottapalazzese.it/wp-content/uploads/2019/06/Grotta-esterno-x-camere.jpg',
+                    title: 'Polignano',
+                    description: 'Polignano Description',
+                    price4h: '900',
+                    price6h: '1200',
+                    priceNight: '2000',
+                    brand: 'La Vinci Yacht'
+                },
+                {
+                    where: 'Leuca',
+                    img: 'https://tourismmedia.italia.it/is/image/mitur/20220404110036-santa-maria-di-leuca-puglia-shutterstock-685007158?wid=1080&hei=660&fit=constrain,1&fmt=webp',
+                    title: 'Leuca',
+                    description: 'Myconos Description',
+                    price4h: '900',
+                    price6h: '1200',
+                    priceNight: '2000',
+                    brand: 'La Vinci Yacht'
+                },
+                {
+                    where: 'Otranto',
+                    img: 'https://images.placesonline.com/photos/otranto_guida__1613587620.jpg',
+                    title: 'Otranto',
+                    description: 'Zante Description',
+                    price4h: '900',
+                    price6h: '1200',
+                    priceNight: '2000',
+                    brand: 'La Vinci Yacht'
+                },
+                {
+                    where: 'Isole Tremiti',
+                    img: 'https://www.puglia.com/wp-content/uploads/2020/09/cala-pagliai-isole-tremiti-1200x796.jpg',
+                    title: 'Isole Tremiti',
+                    description: 'Isole Tremiti Description',
+                    price4h: '900',
+                    price6h: '1200',
+                    priceNight: '2000',
+                    brand: 'La Vinci Yacht'
+                },
+                {
+                    where: 'Gallipoli',
+                    img: 'https://www.dltviaggi.it/immagine/28190/w_854-h_569/gallipoli.jpg',
+                    title: 'Gallipoli',
+                    description: 'Gallipoli Description',
+                    price4h: '900',
+                    price6h: '1200',
+                    priceNight: '2000',
+                    brand: 'La Vinci Yacht'
+                }
+            ],
+        };
+    },
+    computed: {
+        filteredPortfolioCards() {
+            if (this.activeLink === 'Discover All') {
+                return this.storeData.datasPortfolioCards;
+            }
+            else {
+                return this.storeData.datasPortfolioCards.filter(card => card.where === this.activeLink);
+            }
         }
-      ],
-    }
-  },
-  computed: {
-    filteredPortfolioCards() {
-      if (this.activeLink === 'Discover All') {
-        return this.datasPortfolioCards;
-      } else {
-        return this.datasPortfolioCards.filter(card => card.where === this.activeLink);
-      }
-    }
-  },
-  methods: {
-    clickChangeLink(link) {
-      this.activeLink = link;
-    }
-  },
+    },
+    methods: {
+        clickChangeLink(link) {
+            this.activeLink = link;
+        }
+    },
+    components: { AppCardPort }
 }
 </script>
 
@@ -112,46 +129,5 @@ export default {
   background-color: #fff;
 }
 
-.containerCardPortfolio {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 4rem 0;
-  gap: 2rem;
-}
 
-.cardsPortflolio {
-  color: white;
-  position: relative;
-
-  .cardHead {
-    img {
-      border-radius: 1rem;
-    }
-  }
-  
-  .cardFooter {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.322);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: 1rem;
-
-    span {
-      background-color: transparent;
-      font-size: 2rem;
-    }
-    p {
-      background-color: transparent;
-    }
-  }
-}
 </style>

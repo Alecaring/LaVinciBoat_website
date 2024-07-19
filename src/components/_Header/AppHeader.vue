@@ -47,7 +47,7 @@ export default {
 </script>
 
 <template>
-  <div class="navContainer" :key="componentKey">
+  <div v-if="storeData.flag === false" class="navContainer" :key="componentKey">
     <nav>
       <ul>
         <li>
@@ -98,6 +98,8 @@ export default {
 <style lang="scss" scoped>
 .hiddenLinkContainer {
   overflow: hidden;
+  position: fixed;
+  top: 0;
 }
 
 .menu-transition-enter-active,

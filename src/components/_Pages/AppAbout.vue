@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div :class="storeData.isActive === true ? 'none' : ''">
+  <div v-if="storeData.flag === false" :class="storeData.isActive === true ? 'none' : ''">
     about
   </div>
 </template>

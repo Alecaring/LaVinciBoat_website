@@ -6,40 +6,36 @@
     background-color: black;
 }
 
-/* Nasconde le barre di scorrimento per Webkit e IE */
-/* Nasconde le barre di scorrimento per Webkit (Chrome, Safari) */
-body::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-}
 
-/* Nasconde le barre di scorrimento per Firefox */
-body {
-    scrollbar-width: none;
-    /* Firefox */
-}
 
-/* Nasconde le barre di scorrimento per IE e Edge */
-body {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-}
+#app {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /* exact value is given through JavaScript */
+    overflow: auto;
 
-/* Assicura che il contenuto possa ancora essere scorrevole */
-html,
-body {
-    overflow: -moz-scrollbars-none;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
+    display: none;
+    scrollbar-3dlight-color: transparent;
+    scrollbar-arrow-color: transparent;
+    scrollbar-base-color: transparent;
+    scrollbar-darkshadow-color: transparent;
+    scrollbar-face-color: transparent;
+    scrollbar-highlight-color: transparent;
+    scrollbar-shadow-color: transparent;
+    scrollbar-track-color: transparent;
+    scrollbar-width: 0px;
 }
 
-::-ms-overflow-style {
-    scrollbar-width: none;
+html,
+body {
+    height: 99%;
+    overflow: hidden;
 }
 
 .none {
@@ -82,6 +78,7 @@ body {
             span {
                 font-weight: 100;
                 font-size: 1.4rem;
+
                 span {
                     font-weight: 400;
                 }
@@ -96,7 +93,7 @@ body {
 
 .hiddenLinkContainer {
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     margin-top: 10vh;
     background-color: rgb(0, 0, 0);
     display: flex;
@@ -162,6 +159,8 @@ body {
     height: 40vh;
     width: 100%;
     padding-left: 1rem;
+      overflow: hidden; /* Nasconde eventuali overflow */
+
 
     h2 {
         color: white;
@@ -235,8 +234,10 @@ body {
         flex-direction: row;
         overflow-x: scroll;
         gap: 1rem;
-        padding: 0 1rem;
-        height: 40vh;
+        height: 60vh;
+        width: 90vw;
+        margin: 0 auto;
+        object-fit: cover;
 
 
 
@@ -522,7 +523,7 @@ body {
     width: 100%;
     height: 60vh;
     border-radius: 2rem;
-    
+
 
     .PremiumCardWhatsOnBoardContainer {
         position: absolute;
@@ -532,6 +533,7 @@ body {
         height: 60vh;
         border-radius: 2rem;
         padding: 1rem;
+
         .containerTxtfreeCardWhatsOnBoard {
             display: flex;
             align-items: center;
@@ -559,12 +561,14 @@ body {
                 color: #e1e7f0;
             }
         }
+
         .containerTxtfreeCardWhatsOnBoardClosed {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             background-color: transparent;
+
             i {
                 width: 50px;
                 height: 50px;
@@ -575,7 +579,7 @@ body {
                 background-color: #e1e7f0;
                 color: #3a709c;
 
-                
+
             }
         }
 
@@ -617,12 +621,14 @@ body {
                 color: rgb(13, 13, 63);
             }
         }
+
         .containerTxtfreeCardWhatsOnBoardClosed {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             background-color: transparent;
+
             i {
                 width: 50px;
                 height: 50px;
@@ -632,7 +638,7 @@ body {
                 justify-content: center;
                 background-color: #3a709c;
 
-                
+
             }
         }
     }
@@ -659,6 +665,7 @@ body {
     gap: 2rem;
 
 }
+
 .ContainerWhatsOnBoardDiscover {
     display: flex;
     align-items: center;
@@ -672,6 +679,7 @@ body {
         font-weight: 100;
         letter-spacing: 1px;
     }
+
     i {
         width: 30px;
         height: 30px;
@@ -682,3 +690,127 @@ body {
         background-color: #2b2d2e;
     }
 }
+
+
+.card {
+    position: relative;
+    width: 90vw;
+    height: 60vh;
+    overflow: hidden;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+  
+  
+    .cardHead {
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      background-color: transparent;
+      height: calc(100% / 4);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+  
+      div {
+        background-color: transparent;
+  
+        span {
+          font-size: 10vw;
+          padding-left: 5vw;
+          font-weight: 100;
+          background-color: transparent;
+  
+        }
+        p {
+          padding-left: 5vw;
+          font-weight: 100;
+          font-size: 5vw;
+          background-color: transparent;
+  
+        }
+      }
+  
+    }
+  
+    .cardFirstSection {
+      position: absolute;
+      top: 25%;
+      z-index: 2;
+      background-color: transparent;
+      height: calc(100% / 4);
+      width: 100%;
+    }
+  
+    .cardSecondeSection {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      background-color: transparent;
+      height: calc(100% / 4);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      span {
+        background-color: transparent;
+        font-size: 10vw;
+      }
+    }
+  
+    .cardFooter {
+      position: absolute;
+      top: 75%;
+      z-index: 2;
+      background-color: transparent;
+      width: 100%;
+      height: calc(100% / 4);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  
+  
+      p {
+        background-color: transparent;
+        font-size: 5vw;
+        font-weight: 100;
+        padding-right: 5vw;
+  
+      }
+  
+    }
+  }
+  
+  .containerCardPortfolio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4rem 0;
+    gap: 2rem;
+  }
+  
+  .cardsPortflolio {
+    color: white;
+    position: relative;
+    border-radius: 1rem;
+    background-color: transparent;
+  
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1rem;
+      z-index: 1;
+      opacity: .5;
+  
+    }
+  }

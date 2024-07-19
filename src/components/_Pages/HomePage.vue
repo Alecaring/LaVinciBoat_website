@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <div :class="storeData.isActive === true ? 'none' : ''">
+  <div class="HomePage" v-if="storeData.flag === false" :class="storeData.isActive === true ? 'none' : ''">
     <AppBanner />
     <!-- ---------------------- -->
     <AppVideo />
@@ -49,6 +49,14 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+.HomePage::-webkit-scrollbar {
+  display: none;
+}
+.HomePage {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 .word-slider {
   display: inline-block;
 }

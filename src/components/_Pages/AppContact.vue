@@ -1,7 +1,9 @@
 <script>
 import { storeData } from '../../store.js';
+import AppPortfolio from './_ComponentHome/AppPortfolio.vue';
 
 export default {
+  components: { AppPortfolio },
   data() {
     return {
       storeData,
@@ -17,39 +19,7 @@ export default {
         { name: 'こんにちは!' },
         { name: 'Ciao!' },
       ],
-      FeaturedWorkArray: [
-        {
-          img: '1.png',
-          title: 'Hot Type',
-          description: 'Red hot type animations'
-        },
-        {
-          img: '2.png',
-          title: 'Alterscopo',
-          description: 'Web3 risks in real time'
-        },
-        {
-          img: '3.png',
-          title: 'Hot Type',
-          description: 'Red hot type animations'
-        },
-        {
-          img: '4.png',
-          title: 'Alterscopo',
-          description: 'Web3 risks in real time'
-        },
-        {
-          img: '5.png',
-          title: 'Hot Type',
-          description: 'Red hot type animations'
-        },
-        {
-          img: '6.png',
-          title: 'Alterscopo',
-          description: 'Web3 risks in real time'
-        },
-
-      ],
+      
       whatsOnBoardArray: [
         { component: "Wather", pro: false },
         { component: "champain", pro: true },
@@ -83,7 +53,7 @@ export default {
 </script>
 
 <template>
-<div :class="storeData.isActive === true ? 'none' : ''">
+<div v-if="storeData.flag === false" :class="storeData.isActive === true ? 'none' : ''">
   <div>
     <div>
       <div class="containerBannerContacts">
@@ -109,29 +79,7 @@ export default {
     </div>
   </div>
   <!-- ------------------ -->
-  <div class="containerFeaturedWork">
-      <div class="containerTopFeatWork">
-        <h2>Portfolio</h2>
-        <a href="/Portfolio">View All</a>
-      </div>
-      <div class="containerFeaturedWorkSlider">
-
-        <div v-for="item in FeaturedWorkArray" class="FeatWorkCards">
-
-          <div class="FeatWorkCardsImgCont">
-            <img :src="item.img" alt="">
-          </div>
-
-          <div class="FeatWorkCardsTxtCont">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </div>
-
-        </div>
-
-
-      </div>
-    </div>
+  <AppPortfolio/>
     <!-- ------------------ -->
     
     <!-- ------------------ -->
